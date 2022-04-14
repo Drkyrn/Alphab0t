@@ -163,7 +163,7 @@ gcounttprem = "50"
 gcounttuser = "25" 
 
 let multi = true
-let nopref = true
+let nopref = false
 let single = false
 let prefa = setting.prefix
 let menusimple = false
@@ -2025,6 +2025,14 @@ reply(e)
 console.log(e)
 }
 break
+
+case 'simi':{
+dimasganteng = body.slice(6)
+dimasbot = await fetchJson(`https://api.lolhuman.xyz/api/simi?apikey=APIKEY&text=${dimasganteng}`)
+            fakereply(dimasbot.result) 
+}
+            break
+
 case 'getsider':
 if (isLimit(sender, isPremium, isCreator, isOwner, limitawal, limit)) return sendButMessage(from, lang.limit(prefix), `© ${ownername}`, [{buttonId: 'limit', buttonText: {displayText: `Check Limit`, },type: 1,}]);
 try {
