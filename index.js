@@ -158,7 +158,7 @@ pp_bot2 = fs.readFileSync(`image/${setting.thumbnail}`)
 hit_today = []
 blocked = []
 ban = []
-limitawal = "9999"
+limitawal = "50"
 gcounttprem = "50" 
 gcounttuser = "25" 
 
@@ -185,7 +185,7 @@ typemenu = 'list'
 img = setting.img
 baper = setting.ownername
 apiku = 'https://zeeone-ofc.github.io/'
-gc_wa_lu = 'https://chat.whatsapp.com/KEi6MG3k7i2AM27qmuCYZZ' //klo gk punya gc wa gk usah di ganti 👍
+gc_wa_lu = 'https://chat.whatsapp.com/EU890BcXjyBDkNaUT5WmYV' //klo gk punya gc wa gk usah di ganti 👍
 targetpc = setting.ownerNumberr
 owner = targetpc
 fake = setting.fake
@@ -1914,7 +1914,7 @@ if (tekateki.hasOwnProperty(sender.split('@')[0]) && !isCmd && !mek.key.fromMe) 
                     addLevelingXp(sender, 500)
                     fs.writeFileSync("./database/tekateki.json", JSON.stringify(tekateki))
                 } else {
-                    reply("Jawaban Salah!")
+                    reply2("Jawaban Salah!")
                 }
             }
 // SUSUN KATA
@@ -2025,14 +2025,6 @@ reply(e)
 console.log(e)
 }
 break
-
-case 'simi':{
-dimasganteng = body.slice(6)
-dimasbot = await fetchJson(`https://api.lolhuman.xyz/api/simi?apikey=APIKEY&text=${dimasganteng}`)
-            fakereply(dimasbot.result) 
-}
-            break
-
 case 'getsider':
 if (isLimit(sender, isPremium, isCreator, isOwner, limitawal, limit)) return sendButMessage(from, lang.limit(prefix), `© ${ownername}`, [{buttonId: 'limit', buttonText: {displayText: `Check Limit`, },type: 1,}]);
 try {
@@ -3330,7 +3322,7 @@ break
                     } else if ((isMedia && mek.message.videoMessage.seconds < 11 || isQuotedVideo && mek.message.extendedTextMessage.contextInfo.quotedMessage.videoMessage.seconds < 11) && args.length == 0) {
                         const encmedia = isQuotedVideo ? JSON.parse(JSON.stringify(mek).replace('quotedM', 'm')).message.extendedTextMessage.contextInfo : mek
                         const media = await alpha.downloadAndSaveMediaMessage(encmedia)
-                        exif.create('Created By', 'DYBOT', `stickwm_${sender}`)
+                        exif.create('', '', `stickwm_${sender}`)
                     //    ran = getRandom('.webp')
                         await ffmpeg(`./${media}`)
                             .inputFormat(media.split('.')[1])
@@ -3437,7 +3429,7 @@ reply('Pke yg multi aja')
 if((args[0]) == 'multi'){
 if(multi)return reply('_Sudah diaktifkan sebelumnya!_')
 multi = true
-nopref = true
+nopref = false
 single = false
 reply(`_Succses mengganti Prefix ke Multiprefix!_`)
 }else
@@ -4163,19 +4155,6 @@ yau = q.split('@')[1] + '@s.whatsapp.net'
 alpha.groupRemove(from, [yau])
 reply(`Succses kick target!`)
 break
-
-case 'kickall':
-			if (!isGroup) return reply(lang.onlygc())
-					if (!isGroupAdmins) return reply(lang.onlygcAdmin())
-					if (!isBotGroupAdmins) return reply(lang.botNotAdm())
-                members_id = []
-                teks = (args.length > 1) ? body.slice(9).trim() : ''
-					teks += '\n\n'
-					for (let mem of groupMembers) {
-				   	members_id.push(mem.jid)
-				  	}
-                alpha.groupRemove(from, members_id, true)
-                break
 
 case 'rkick': case 'kickreply':
 if (!isGroup) return reply(lang.onlygc())
@@ -5276,16 +5255,7 @@ case 'linkgroup':
 					reply(`Arti Nama ${teks}\n\n`+anu.result)
 				await limitAdd(sender, limit)
 					break   
-					
-		case 'exif':
-                    if (!isOwner && !mek.key.fromMe) return reply(`Khusus Owner Om`)
-					const exifff = `${args.join(' ')}`
-					const namaPack = exifff.split('|')[0]
-					const authorPack = exifff.split('|')[1]
-					exif.create(namaPack, authorPack)
-					await reply('Done gan')
-				break
-			   
+			
  case 'getexif':
 try {
     if (!m.quoted) return reply('Tag stikernya!')
