@@ -3415,6 +3415,22 @@ break
 		    		await fakethumb(tbuff,ytresult)
 					await limitAdd(sender, limit)
 					break   
+										
+				case 'ytmp3':
+if (isBanned)return sticBanned(from)
+if (args.length ==0)return reply('Link nya Mana Kak?')
+ini_link = args.join(" ")
+sticWait(from)
+ini = await fetchJson(`https://api-yogipw.herokuapp.com/api/download/ytmp3?url=${ini_link}`)
+get = ini.result
+ini_txt =`*Judul* : ${get.title}\n*Author* : ${get.channel}\n*Publis* : ${get.published}\n*Views* : ${get.views}`
+yt3 = fs.readFileSync('./gambar/logo/ytdown.jpg')
+zassxd.sendMessage(from, yt3, image, { quoted: mek, caption: ini_txt })
+res = await getBuffer(get.url)
+sticLoad(from)
+zassxd.sendMessage(from, res, audio)
+break
+
 			case 'setreply':
 			case 'setfake':
 			        if (!mek.key.fromMe && !isOwner && !isCreator) return reply(lang.onlyOwner())
